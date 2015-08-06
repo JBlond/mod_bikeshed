@@ -5,3 +5,8 @@ What mod_bikeshed does is allow the server's Administrator to change the server 
 Why the name mod_bikeshed?
 It came from this mailing list thread discussing allowing the manipulations or removal of ServerTokens;
 http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
+
+#Compiling: 
+```
+	apxs -c mod_bikeshed.c
+```
