@@ -6,7 +6,18 @@ Why the name mod_bikeshed?
 It came from this mailing list thread discussing allowing the manipulations or removal of ServerTokens;
 http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
 
-#Compiling: 
+## Compiling: 
 ```
-	apxs -c mod_bikeshed.c
+	apxs -cia mod_bikeshed.c
+```
+
+## Config
+
+*BikeShedTokensReplace* Set On/Off to switch bikeshed string display
+*BikeShedTokensString* The string to replace the server tokens/signature with" or 'None' to disable ServerTokens
+*BikeShedAddBanner* Set On/Off to switch add module banner to replaced server signature
+
+```
+BikeShedTokensString wds-server
+BikeShedTokensReplace On
 ```
