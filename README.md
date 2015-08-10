@@ -14,8 +14,11 @@ http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
 ## Config
 
 *BikeShedTokensReplace* Set On/Off to switch bikeshed string display
+
 *BikeShedTokensString* The string to replace the server tokens/signature with" or 'None' to disable ServerTokens
+
 *BikeShedAddBanner* Set On/Off to switch add module banner to replaced server signature
+
 
 ```
 BikeShedTokensString wds-server
