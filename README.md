@@ -8,7 +8,7 @@ http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
 
 ## Compiling: 
 ```
-git clone
+git clone https://github.com/JBlond/mod_bikeshed.git
 cd mod_bikeshed
 apxs -cia mod_bikeshed.c
 ```
