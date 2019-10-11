@@ -8,7 +8,9 @@ http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
 
 ## Compiling: 
 ```
-	apxs -cia mod_bikeshed.c
+git clone
+cd mod_bikeshed
+apxs -cia mod_bikeshed.c
 ```
 
 ## Config
