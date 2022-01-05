@@ -1,6 +1,7 @@
 mod_bikeshed
 ============
-What mod_bikeshed does is allow the server's Administrator to change the server signature/tokens to anything they want and will show up in the Server: header as well. You can also turn tokens off completely by setting BikeShedTokensString to "None".
+What mod_bikeshed does is allow the server's Administrator to change the server signature/tokens to anything they want and will show up in the Server: header as well. 
+You can also turn tokens off completely by setting BikeShedTokensString to "None".
 
 Why the name mod_bikeshed?
 It came from this mailing list thread discussing allowing the manipulations or removal of ServerTokens;
@@ -21,6 +22,7 @@ apxs -cia mod_bikeshed.c
 
 *BikeShedAddBanner* Set On/Off to switch add module banner to replaced server signature
 
+### Exmaple config
 
 ```
 BikeShedTokensString wds-server
