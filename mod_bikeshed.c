@@ -3,7 +3,7 @@
  *   Copyright (C) 2012 G. Smith
  *   Initial release 0.1.0 - September 24, 2012
  *
- *   This is mod_avc by Guenter Knauf (thanks Guenter) modified to replace
+ *   This is mod_avc by Günter Knauf (thanks Günter) modified to replace
  *   ServerTokens with what we want Apache to show in the server tokens/signature
  *   or remove the ServerTokens completely including from the header. 
  *   Token replacing parts of this module were based on mod_security2 by
