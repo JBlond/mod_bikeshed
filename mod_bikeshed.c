@@ -1,7 +1,8 @@
 /*******************************************************************************
  *   mod_bikeshed For Apache 2.2 & 2.4
- *   Copyright (C) 2012 G. Smith
+ *   Copyright (C) 2022 G. Smith
  *   Initial release 0.1.0 - September 24, 2012
+ *   Release 1.0.0 - January 06, 2022
  *
  *   This is mod_avc by Günter Knauf (thanks Günter) modified to replace
  *   ServerTokens with what we want Apache to show in the server tokens/signature
@@ -39,7 +40,8 @@
  *******************************************************************************
 */
 
-#define BIKESHED_MODULE_VERSION "0.1.1"
+#define BIKESHED_MODULE_VERSION "1.0.0"
+#define BIKESHED_DEFAULT_TOKEN "Muad'Dib"
 
 #include "apr_pools.h"
 #define APR_WANT_STRFUNC
@@ -66,7 +68,6 @@ module AP_MODULE_DECLARE_DATA bikeshed_module;
 
 typedef struct {
     int bikeshed_tokens_replace;
-    int bikeshed_add_banner;
     char *bikeshed_tokens_string;
 } bikeshed_srv_config;
 
@@ -79,8 +80,6 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
     bikeshed_srv_config *svrcfg = 
       (bikeshed_srv_config *)ap_get_module_config(s->module_config, 
                                                   &bikeshed_module);
-
-    ap_add_version_component(p, "mod_bikeshed/" BIKESHED_MODULE_VERSION );
 
     if (svrcfg->bikeshed_tokens_replace) {
 
@@ -122,7 +121,8 @@ static void *bikeshed_create_srv_config(apr_pool_t *p, server_rec *s)
     bikeshed_srv_config *svrcfg = apr_pcalloc(p, 
                                               sizeof(bikeshed_srv_config));
     /* Set the defaults */
-    svrcfg->bikeshed_tokens_replace = 1;
+    svrcfg->bikeshed_tokens_replace = 0;
+    svrcfg->bikeshed_tokens_string = BIKESHED_DEFAULT_TOKEN;
     return svrcfg;
 }
 
@@ -168,10 +168,6 @@ static const command_rec bikeshed_cmds[] =
     AP_INIT_FLAG("BikeShedTokensReplace", set_flag_slot,
         (void *)APR_OFFSETOF(bikeshed_srv_config, bikeshed_tokens_replace),
         RSRC_CONF, "Set On/Off to switch bikeshed string display"),
-    AP_INIT_FLAG("BikeShedAddBanner", set_flag_slot,
-        (void *)APR_OFFSETOF(bikeshed_srv_config, bikeshed_add_banner),
-        RSRC_CONF, "Set On/Off to switch add module banner to replaced "
-                   "server signature"),
     AP_INIT_TAKE1("BikeShedTokensString", set_string_slot,
         (void *)APR_OFFSETOF(bikeshed_srv_config, bikeshed_tokens_string),
         RSRC_CONF, "The string to replace the server tokens/signature with"
