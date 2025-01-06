@@ -1,5 +1,5 @@
-mod_bikeshed
-============
+# mod_bikeshed
+
 What mod_bikeshed does is allow the server's Administrator to change the server signature/tokens 
 to anything they want and will show up in the Server: header as well.
 
@@ -10,7 +10,8 @@ It came from this mailing list thread discussing allowing the manipulations or r
 http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
 
 ## Compiling: 
-```
+
+```bash
 git clone https://github.com/JBlond/mod_bikeshed.git
 cd mod_bikeshed
 apxs -cia mod_bikeshed.c
@@ -24,7 +25,7 @@ apxs -cia mod_bikeshed.c
 
 ### Exmaple config
 
-```
+```ini
 BikeShedTokensString wds-server
 BikeShedTokensReplace On
 ```
