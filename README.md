@@ -7,7 +7,7 @@ You can also turn tokens off completely by setting BikeShedTokensString to "None
 
 Why the name mod_bikeshed?
 It came from this mailing list thread discussing allowing the manipulations or removal of ServerTokens;
-http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
+<http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2>
 
 ## Compiling: 
 
