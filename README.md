@@ -19,7 +19,7 @@ apxs -cia mod_bikeshed.c
 
 ## Config
 
-`BikeShedTokensReplace` Set On/Off to switch bikeshed string display
+`BikeShedTokensReplace` Set `On` | `Off` to switch bikeshed string display
 
 `BikeShedTokensString` The string to replace the server `"tokens/signature with"` or `'None'` to disable `ServerTokens`
 
