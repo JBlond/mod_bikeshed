@@ -112,8 +112,6 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
       }
 
       if (strcasecmp(BikeShedTokensString, "none") == 0) {
-        a = 1;
-        svrcfg->bikeshed_tokens_string = "";
         ap_log_rerror(APLOG_MARK, APLOG_NOTICE, 0, r, "BikeShed: server signature/tokens successfully disabled.");
       } else {
         ap_log_rerror(APLOG_MARK, APLOG_NOTICE, 0, r, "BikeShed: server signature/tokens successfully changed to \"%s\".", svrcfg->bikeshed_tokens_string);
