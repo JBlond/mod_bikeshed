@@ -6,20 +6,20 @@
  *
  *   This is mod_avc by Günter Knauf (thanks Günter) modified to replace
  *   ServerTokens with what we want Apache to show in the server tokens/signature
- *   or remove the ServerTokens completely including from the header. 
+ *   or remove the ServerTokens completely including from the header.
  *   Token replacing parts of this module were based on mod_security2 by
  *   Trustwave Holdings, Inc. (http://www.trustwave.com/)
- *   
- *   Why the mod_bikeshed name? It came from this mailing list thread here 
+ *
+ *   Why the mod_bikeshed name? It came from this mailing list thread here
  *   discussing allowing the manipulations or removal of ServerTokens;
  *   http://marc.info/?l=apache-httpd-dev&m=116542448411598&w=2
  *
  *   Compiling: apxs -c mod_bikeshed.c
  *
- *   I personally feel it is a bad idea depending on why you want to do it. 
+ *   I personally feel it is a bad idea depending on why you want to do it.
  *   Those who pay per byte can see some monitary savings on very busy servers.
  *   Those wanting to obscure their server for security reasons should remember
- *   that security through obscurity is no real security at all. I still see 
+ *   that security through obscurity is no real security at all. I still see
  *   requests for this feature though and wanted to try my hand at modifying
  *   a module to fit a different purpose.
  *
@@ -62,7 +62,7 @@ APLOG_USE_MODULE(bikeshed);
 #  define bikeshed_get_server_version ap_get_server_banner
 #else
 #  define bikeshed_get_server_version ap_get_server_version
-#endif 
+#endif
 
 module AP_MODULE_DECLARE_DATA bikeshed_module;
 
@@ -77,8 +77,8 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
 {
     char *original_server_version = NULL;
     int a = 0;
-    bikeshed_srv_config *svrcfg = 
-      (bikeshed_srv_config *)ap_get_module_config(s->module_config, 
+    bikeshed_srv_config *svrcfg =
+      (bikeshed_srv_config *)ap_get_module_config(s->module_config,
                                                   &bikeshed_module);
 
     if (svrcfg->bikeshed_tokens_replace) {
@@ -87,9 +87,9 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
 
       if (original_server_version == NULL) {
           ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO, 0, s,
-                       "Apache returned null as signature " 
+                       "Apache returned null as signature "
                          "and should not have.");
-          return -1;
+          return !OK;
       }
 
       if ((strcasecmp(svrcfg->bikeshed_tokens_string, "none") == 0)) {
@@ -102,15 +102,15 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
 
       /* Did it really change? */
       original_server_version = (char *)bikeshed_get_server_version();
-      if ((a == 0) && ((original_server_version == NULL) || 
-         (strcmp(original_server_version, svrcfg->bikeshed_tokens_string) != 0))) 
+      if ((a == 0) && ((original_server_version == NULL) ||
+         (strcmp(original_server_version, svrcfg->bikeshed_tokens_string) != 0)))
       {
-              ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO, 0, s, 
-                       "Failed to change server signature to \"%s\".", 
+              ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO, 0, s,
+                       "Failed to change server signature to \"%s\".",
                          svrcfg->bikeshed_tokens_string);
               return 0;
       }
-    } 
+    }
 
     return OK;
 }
@@ -118,7 +118,7 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
 /* Create server config data structure */
 static void *bikeshed_create_srv_config(apr_pool_t *p, server_rec *s)
 {
-    bikeshed_srv_config *svrcfg = apr_pcalloc(p, 
+    bikeshed_srv_config *svrcfg = apr_pcalloc(p,
                                               sizeof(bikeshed_srv_config));
     /* Set the defaults */
     svrcfg->bikeshed_tokens_replace = 0;
@@ -154,7 +154,7 @@ static const char *set_string_slot(cmd_parms *cmd, void *dummy, const char *arg)
     if (err != NULL) {
         return err;
     }
-    
+
     if (arg) {
         *(const char **)((char *)svrcfg + offset) = apr_pstrdup(cmd->pool, arg);
     }
