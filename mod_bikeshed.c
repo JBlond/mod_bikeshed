@@ -40,7 +40,7 @@
  *******************************************************************************
 */
 
-#define BIKESHED_MODULE_VERSION "1.0.0"
+#define BIKESHED_MODULE_VERSION "1.0.1"
 #define BIKESHED_DEFAULT_TOKEN "Muad'Dib"
 
 #include "apr_pools.h"
