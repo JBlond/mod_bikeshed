@@ -110,11 +110,11 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t * 
                          svrcfg->bikeshed_tokens_string);
               return 0;
       }
-    }
 
-    ap_log_error(APLOG_MARK, APLOG_NOTICE | APLOG_NOERRNO, 0, s,
+      ap_log_error(APLOG_MARK, APLOG_NOTICE | APLOG_NOERRNO, 0, s,
         "BikeShed: server signature/tokens successfully changed to \"%s\".",
         svrcfg->bikeshed_tokens_string);
+    }
 
     return OK;
 }
